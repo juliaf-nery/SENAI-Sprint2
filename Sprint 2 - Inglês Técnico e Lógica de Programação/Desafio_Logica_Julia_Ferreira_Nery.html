@@ -3,45 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bem vindo!!</title>
+    <title>Bem vindo!</title>
 </head>
 
 <body>
     <script>
+        function quebraTexto(texto) {
+            document.write("<br>" + texto + "<br>")
+        }
         let distancia_Percorrida = parseFloat(prompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?"));
-
+        while (Number.isNaN(distancia_Percorrida) || distancia_Percorrida <= 0) {
+            alert("Por favor, digite apenas números válidos!");
+            distancia_Percorrida = parseFloat(prompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?"));
+            console.log(distancia_Percorrida);
+        };
         let consumo_Medio = parseFloat(prompt("Qual o consumo médio do seu veículo (em km/L)?"));
-        var consumo_Necessario_Litros = distancia_Percorrida / consumo_Medio
+        while (Number.isNaN(consumo_Medio) || consumo_Medio <= 0) {
+            alert("Por favor, digite apenas números válidos!");
+            consumo_Medio = parseFloat(prompt("Qual o consumo médio do seu veículo (em km/L)?"));
+            console.log(consumo_Medio);
+        };
+        let consumo_Necessario_Litros = distancia_Percorrida / consumo_Medio
 
         let quantidade_Postos_Pesquisados = parseInt(prompt('Em quantos postos você pesquisou?'));
-        while (isNaN(quantidade_Postos_Pesquisados)) {
-            alert("Erro! Digite apenas números!")
+        while (Number.isNaN(quantidade_Postos_Pesquisados) || quantidade_Postos_Pesquisados <= 0) {
+            alert("Por favor, digite apenas números válidos!");
             quantidade_Postos_Pesquisados = parseInt(prompt('Em quantos postos você pesquisou?'));
-            continue;
-        }
+            console.log(quantidade_Postos_Pesquisados);
+        };
 
-        var menor_Valor_Pesquisado = Infinity;
-
+        let menor_Valor_Pesquisado = Infinity;
         let soma_total_Valores_Pesquisados = 0;
         for (let i = 0; i < quantidade_Postos_Pesquisados; i++) {
             let valor_Postos = parseFloat(prompt(`Digite o valor do posto ${i + 1} (em R$)`));
-            soma_total = soma_total_Valores_Pesquisados += valor_Postos;
+            soma_total_Valores_Pesquisados += valor_Postos;
 
             if (valor_Postos < menor_Valor_Pesquisado) {
                 menor_Valor_Pesquisado = valor_Postos;
             }
         }
+
         let media_Valores = soma_total_Valores_Pesquisados / quantidade_Postos_Pesquisados;
         console.log(media_Valores);
 
-        let gasto_Diario = 2 * (consumo_Necessario_Litros * menor_Valor_Pesquisado);
-        parseFloat(gasto_Diario)
-        console.log(gasto_Diario)
+        let gasto_Diario = parseFloat(2 * (consumo_Necessario_Litros * menor_Valor_Pesquisado));
+        console.log(gasto_Diario);
 
-        document.write("O consumo necessário é " + consumo_Necessario_Litros + " litros" + "<br>");
-        document.write("O menor valor pesquisado é R$ " + menor_Valor_Pesquisado + "<br>");
-        document.write("A média dos valores pesquisados é R$ " + media_Valores + "<br>");
-        document.write("O gasto diário (ida e volta) é R$ " + gasto_Diario + "<br>");
+        quebraTexto("O consumo necessário é " + consumo_Necessario_Litros + " litros");
+        quebraTexto("O menor valor pesquisado é R$ " + menor_Valor_Pesquisado);
+        quebraTexto("A média dos valores pesquisados é R$ " + media_Valores);
+        quebraTexto("O gasto diário (ida e volta) é R$ " + gasto_Diario);
     </script>
 </body>
 
