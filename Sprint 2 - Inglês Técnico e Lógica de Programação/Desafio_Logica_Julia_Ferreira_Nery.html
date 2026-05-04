@@ -2,53 +2,67 @@
 <html lang="PT/BR">
 
 <head>
+    <!-- Serve para permitir que os navegadores exibam corretamente acentos, caracteres especiais (ç, á, ñ) e emojis e permite a exibição de múltiplos idiomas -->
     <meta charset="UTF-8">
     <title>Bem vindo!</title>
 </head>
 
 <body>
+    <!-- Permite a incorporação direta de um código em outra linguagem, geralmente sendo JavaScript -->
     <script>
+        // Função que serve para quebrar linha de um texto para outro
         function quebraTexto(texto) {
             document.write("<br>" + texto + "<br>")
         }
+        // Variável que determina a distância percorrida pelo usuário = Transforma o valor inserido em um valor flutuante(pergunta que será mostrada em pop-up)
         let distancia_Percorrida = parseFloat(prompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?"));
+        // Estrutura de repetição que tem o propósito de impedir que o código continue a não ser que o valor inserido seja um número. Evitando o erro NaN. (Existe também uma forma de fazer usando function)
         while (Number.isNaN(distancia_Percorrida) || distancia_Percorrida <= 0) {
             alert("Por favor, digite apenas números válidos!");
             distancia_Percorrida = parseFloat(prompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?"));
             console.log(distancia_Percorrida);
+            // Serve para que essa estrutura não se torne um loop infinito e siga para a próxima etapa ao inserir um valor numérico
         };
+        // Variável que determina o consumo médio do usuário = " (")
         let consumo_Medio = parseFloat(prompt("Qual o consumo médio do seu veículo (em km/L)?"));
         while (Number.isNaN(consumo_Medio) || consumo_Medio <= 0) {
             alert("Por favor, digite apenas números válidos!");
             consumo_Medio = parseFloat(prompt("Qual o consumo médio do seu veículo (em km/L)?"));
             console.log(consumo_Medio);
         };
+        // Variável que determina o consumo necessário de litros do usuário = O que foi percorrido / pelo consumo médio
         let consumo_Necessario_Litros = distancia_Percorrida / consumo_Medio
-
+        // Váriavel que determina a quantidade de postos pesquisados = Tenta transforma o valor inserido pelo usuário em um valor inteiro(") e caso não seja possível ele ira retornar um NaN
         let quantidade_Postos_Pesquisados = parseInt(prompt('Em quantos postos você pesquisou?'));
+        // Laço de repetição com o objetivo de criar um loop de segurança (Essa função visa determinar se o que foi inserido pelo usuário foi uma string e caso seja verdade o resto do código dá continuidade(representa a variável que está sendo posta em validação))
         while (Number.isNaN(quantidade_Postos_Pesquisados) || quantidade_Postos_Pesquisados <= 0) {
+            // Mensagem apresentada caso o código dê continuidade
             alert("Por favor, digite apenas números válidos!");
+            // A pergunta é repetida até que o valor inserido não seja NaN
             quantidade_Postos_Pesquisados = parseInt(prompt('Em quantos postos você pesquisou?'));
+            // Serve para que caso a validação anterior a ele não tenha dado como verdadeira ele retornar imediatamente acima para que a validação ocorra novamente até dar falso e após isso, dar continuidade para o resto do código dentro das {}
             console.log(quantidade_Postos_Pesquisados);
         };
-
+        // Váriavel que determina o menor valor pesquisado nos postos = Uma propriedade global usada para definir o menor valor inserido pelo usuário
         let menor_Valor_Pesquisado = Infinity;
+        // Variável acumuladora que começa no 0 e serve para armazenar os cálculos ─ a soma ─ dos valores inseridos em valor_Postos para o cálculo da média
         let soma_total_Valores_Pesquisados = 0;
+        // Laço de repetição (variável "contadora" que diz por qual valor começar a conta,ou seja, ele começa do zero e vai sendo somado +1 até atigir o limite de postos; dtermina se a variável é menor que a qtd_postos_pesquisados e se caso for verdadeira o valor continua a ser executado dentro das {}; é o mesmo que dizer i = i + 1, ou seja ele soma o valor da variável com 1)
         for (let i = 0; i < quantidade_Postos_Pesquisados; i++) {
             let valor_Postos = parseFloat(prompt(`Digite o valor do posto ${i + 1} (em R$)`));
             soma_total_Valores_Pesquisados += valor_Postos;
-
+            // Condição que, caso seja verdadeira, o valor de menor_Valor_Pesquisado altera a cada menor valor obtido
             if (valor_Postos < menor_Valor_Pesquisado) {
                 menor_Valor_Pesquisado = valor_Postos;
             }
         }
-
+        // Variável que armazena a média dos valores totais pesquisados em cada posto
         let media_Valores = soma_total_Valores_Pesquisados / quantidade_Postos_Pesquisados;
         console.log(media_Valores);
-
+        // Variável que armazena o valor do gasto diário consumido pelo usuário
         let gasto_Diario = parseFloat(2 * (consumo_Necessario_Litros * menor_Valor_Pesquisado));
         console.log(gasto_Diario);
-
+        // Função de quebra de linha para exibir os resultados finais
         quebraTexto("O consumo necessário é " + consumo_Necessario_Litros + " litros");
         quebraTexto("O menor valor pesquisado é R$ " + menor_Valor_Pesquisado);
         quebraTexto("A média dos valores pesquisados é R$ " + media_Valores);
